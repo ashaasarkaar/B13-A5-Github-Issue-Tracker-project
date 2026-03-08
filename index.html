@@ -15,7 +15,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
 
     <!-- Add fontawesome -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <!-- link with Tailwind + DaisyUI -->
@@ -26,8 +28,62 @@
     <link rel="stylesheet" href="./style/style.css">
 </head>
 
-<body>
-   
+<body class="min-h-screen max-w-md bg-[#FFFFFF] shadow-lg mx-auto my-10">
+
+    <div id="login-page">
+
+        <!-- github login logo START -->
+        <div class="github-logo pt-7">
+            <img class="mx-auto mb-6" src="./assets/github-logo.png" alt="github-logo">
+        </div>
+        <!-- github login logo END -->
+
+        <!-- After logo text START -->
+        <div class="space-y-2">
+            <h2 class="font-semibold text-2xl text-center">GitHub Issues Tracker</h2>
+            <p class="text-[#64748B] text-center">Sign in to manage your issues</p>
+        </div>
+        <!-- After logo text END -->
+
+        <!-- login form START -->
+        <div class="form max-w-sm mx-auto">
+
+            <div class="card-body">
+                <fieldset class="fieldset">
+                    <label class="label text-neutral font-bold">Username</label>
+                    <input id="input-username" type="text" class="input rounded-lg w-full"
+                        placeholder="Enter Username" />
+                    <p class="text-[#4A00FF]">Default: admin</p>
+                    <br>
+
+                    <label class="label text-neutral font-bold">Password</label>
+                    <input id="input-password" type="password" class="input rounded-lg  w-full" maxlength="8"
+                        placeholder="Enter Password" />
+                    <p class="text-[#4A00FF]">Default: admin123</p>
+
+                    <button id="signin-btn" class="btn btn-primary mt-4 rounded-lg font-semibold w-full">Sign In</button>
+                </fieldset>
+
+                <!-- divider START -->
+                <div class="divider">OR</div>
+                <!-- divider END -->
+
+                <p class="text-center text-[#64748B]">Demo Credentials:</p>
+
+                <div class="bg-base-200 text-center py-5 rounded-lg">
+                    <p><span class="font-semibold">Username: </span>admin</p>
+                    <p><span class="font-semibold">Password: </span>admin123</p>
+                </div>
+
+            </div>
+        </div>
+        <!-- login form END -->
+    </div>
+
+    <!-- link with js -->
+     <script src="./script/login.js"></script>
 </body>
+
+
 
 </html>
