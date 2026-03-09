@@ -13,6 +13,7 @@ const btnCloseContainer = getId('btn-close');
 const allCardContainer = getId('card-container');
 const openContainer = getId('open-container');
 const closeContainer = getId('close-container');
+const countIssue = getId('count-issue');
 
 // function for toggle button START
 function changeTab(tab) {
@@ -50,7 +51,9 @@ function changeTab(tab) {
         closeContainer.classList.remove('hidden');
     }
 
-}
+    updateDashboard();
+
+};
 changeTab(defaultTab);
 // function for toggle button END
 
@@ -144,11 +147,28 @@ const displayCard = (cards) =>{
         ? openContainer.appendChild(moveCard)
         : closeContainer.appendChild(moveCard)
     })
+    updateDashboard();
 };
+
+
+// finally all the dashboard update
+function updateDashboard() {
+
+    const counts = {
+        all: allCardContainer.children.length,
+        open: openContainer.children.length,
+        close: closeContainer.children.length,
+    };
+
+    // availableJobsCount.innerText = counts.all;
+    countIssue.innerText = counts[defaultTab];
+}
+updateDashboard();
+
 loadCards();
 
 // Initial load
-loadCards(defaultTab);
+changeTab(defaultTab);
 
 
 
