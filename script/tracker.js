@@ -75,7 +75,14 @@ const displayCard = (cards) =>{
                 <img src="./assets/${card.status === 'open' ? 
                     'Open-Status.png' : 'Closed- Status .png'}" 
                     alt="status-changing-icon">
-                <button class="btn btn-secondary btn-soft rounded-full px-10">${card.priority}</button>
+                <button class="rounded-full px-10
+                ${card.priority === 'high'
+                    ? 'btn btn-secondary btn-soft'
+                    : card.priority === 'medium'
+                    ? 'btn btn-warning btn-soft'
+                    : 'btn btn-neutral btn-soft'
+                }
+                ">${card.priority.toUpperCase()}</button>
             </div>
 
             <h2 class="font-semibold text-md">${card.title}</h2>
