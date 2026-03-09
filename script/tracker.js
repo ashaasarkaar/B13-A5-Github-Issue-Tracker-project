@@ -33,12 +33,24 @@ changeTab(defaultTab);
 // function for toggle button END
 
 
-//group of HTML Elements
-const createElements = (arr) => {   //array ar upor map korle array return dei
-    const htmlElements = arr.map((el) => ` 
-        <span class="btn btn-secondary btn-soft rounded-full">${el}</span>`);
-        
-    return htmlElements.join(" ");  //array k string kore
+//dymanic labels selection function 
+const createLabels = (labels) =>{
+    const btnLabels = labels.map((label)=>`
+    <span class="btn btn-secondary btn-soft rounded-full
+    ${label === "bug" ? 'btn-error'
+    : label === "help wanted" ? 'btn-warning'
+    : label === "enhancement" ? 'btn-success'
+    : label === "documentation" ? 'btn-info'
+    : 'btn secondary'
+    }">
+    ${label === "bug" ? '<i class="fa-solid fa-bug"></i>'
+      : label === "help wanted" ? '<i class="fa-solid fa-life-ring"></i>'
+      : label === "enhancement" ? '<i class="fa-solid fa-burst"></i>'
+      : label === "documentation" ? '<i class="fa-solid fa-file"></i>'
+      : '<i class="fa-brands fa-jira"></i>'
+    }
+     ${label}</span>`);
+    return btnLabels.join(" "); //convert array to string
 }
 
 // get json promise data fol all issues
@@ -88,7 +100,7 @@ const displayCard = (cards) =>{
             <h2 class="font-semibold text-md">${card.title}</h2>
             <p class="text-neutral/50 text-sm">${card.description}</p>
             <div class="btns flex items-center gap-1 flex-nowrap">
-               ${createElements(card.labels)}
+               ${createLabels(card.labels)}
             </div>
 
             
