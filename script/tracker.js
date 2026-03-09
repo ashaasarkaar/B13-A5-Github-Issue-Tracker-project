@@ -79,7 +79,7 @@ const displayCard = (cards) =>{
 
         
         
-        <div class="cards-body p-5 shadow-lg space-y-2 b rounded-xl border-t-4 ${card.status === 'open' ? 'border-green-500' : 'border-purple-500'}">
+        <div class="cards-body p-5 shadow-lg space-y-2 b rounded-xl border-t-4 ${card.status === 'open' ? 'border-green-500' : 'border-purple-500'} overflow-hidden">
 
             
         
