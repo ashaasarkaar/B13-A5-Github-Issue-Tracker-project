@@ -72,12 +72,14 @@ const displayCard = (cards) =>{
             
         
             <div class="flex justify-between items-center">
-                <img src="./assets/Open-Status.png" alt="open-status-icon">
+                <img src="./assets/${card.status === 'open' ? 
+                    'Open-Status.png' : 'Closed- Status .png'}" 
+                    alt="status-changing-icon">
                 <button class="btn btn-secondary btn-soft rounded-full px-10">${card.priority}</button>
             </div>
 
-            <h2 class="font-semibold">${card.title}</h2>
-            <p class="text-neutral/50">${card.description}</p>
+            <h2 class="font-semibold text-md">${card.title}</h2>
+            <p class="text-neutral/50 text-sm">${card.description}</p>
             <div class="btns flex items-center gap-1 flex-nowrap">
                ${createElements(card.labels)}
             </div>
