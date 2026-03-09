@@ -10,6 +10,9 @@ const inactiveTab = ["bg-transparent", "text-neutral/50"];
 const btnAllContainer = getId('btn-all');
 const btnOpenContainer = getId('btn-open');
 const btnCloseContainer = getId('btn-close');
+const allCardContainer = getId('card-container');
+const openContainer = getId('open-container');
+const closeContainer = getId('close-container');
 
 // function for toggle button START
 function changeTab(tab) {
@@ -28,6 +31,25 @@ function changeTab(tab) {
         }
 
     }
+
+    //add hidden class in clickable sections
+    const sections = [allCardContainer, openContainer, closeContainer]
+    for(const section of sections) {
+        section.classList.add('hidden');
+    }
+
+
+    //remove hidden class from clickable sections
+    if(tab === 'all') {
+        allCardContainer.classList.remove('hidden');
+    }
+    else if(tab === 'open'){
+        openContainer.classList.remove('hidden');
+    }
+    else{
+        closeContainer.classList.remove('hidden');
+    }
+
 }
 changeTab(defaultTab);
 // function for toggle button END
@@ -116,6 +138,11 @@ const displayCard = (cards) =>{
 
         //4. append child
         cardContainer.append(insertCards);
+
+        const moveCard = insertCards.cloneNode(true);
+        card.status === 'open'
+        ? openContainer.appendChild(moveCard)
+        : closeContainer.appendChild(moveCard)
     })
 };
 loadCards();
