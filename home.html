@@ -56,7 +56,7 @@
                                         <path d="m21 21-4.3-4.3"></path>
                                     </g>
                                 </svg>
-                                <input type="search" required placeholder="Search" />
+                                <input id="" type="search" required placeholder="Search" />
                             </label>
                             <!-- search button END -->
 
@@ -91,7 +91,7 @@
                                     <path d="m21 21-4.3-4.3"></path>
                                 </g>
                             </svg>
-                            <input type="search" required placeholder="Search" />
+                            <input id="input-search" type="search" required placeholder="Search" />
                         </label>
                         <!-- search button END -->
 
@@ -111,15 +111,16 @@
     <!-- Tab Section START -->
     <section class="bg-base-100 shadow-sm w-10/12 mx-auto mt-10 p-6 space-x-4 rounded-sm">
 
-        <button onclick="changeTab('all')" id="btn-all" class="btn">All</button>
-        <button onclick="changeTab('open')" id="btn-open" class="btn">Open</button>
-        <button onclick="changeTab('close')" id="btn-close" class="btn">Closed</button>
+        <button onclick="changeTab('all')" id="btn-all" class="btn lesson-btn">All</button>
+        <button onclick="changeTab('open')" id="btn-open" class="btn lesson-btn">Open</button>
+        <button onclick="changeTab('close')" id="btn-close" class="btn lesson-btn">Closed</button>
 
     </section>
     <!-- Tab Section END -->
 
     <!-- dynamic issues count section START -->
-    <section class="bg-base-100 shadow-sm w-10/12 mx-auto mt-5 p-6 flex flex-col gap-6 md:flex-row justify-between items-center rounded-sm">
+    <section
+        class="bg-base-100 shadow-sm w-10/12 mx-auto mt-5 p-6 flex flex-col gap-6 md:flex-row justify-between items-center rounded-sm">
 
         <!-- left side count issues START -->
         <div class="left-side flex flex-col md:flex-row gap-3 items-center text-center md:text-left">
@@ -153,8 +154,15 @@
     </section>
     <!-- dynamic issues count section END -->
 
+    <!-- spinner section start -->
+    <section id="spinner" class="flex justify-center items-center py-10 hidden">
+        <span class="loading loading-bars loading-xl"></span>
+    </section>
+    <!-- spinner section end -->
+
     <!-- card display section START -->
-    <section id="card-container" class="bg-base-100 shadow-sm w-10/12 mx-auto rounded-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-6 hidden">
+    <section id="card-container"
+        class="bg-base-100 shadow-sm w-10/12 mx-auto rounded-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-6 hidden">
 
 
 
@@ -165,25 +173,44 @@
 
 
 
-        <!-- Open card display section START -->
-    <section id="open-container" class="bg-base-100 shadow-sm w-10/12 mx-auto rounded-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-6 hidden">
+    <!-- Open card display section START -->
+    <section id="open-container"
+        class="bg-base-100 shadow-sm w-10/12 mx-auto rounded-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-6 hidden">
 
-        
+
 
 
     </section>
     <!--Open  card display section END -->
 
 
-    
-        <!-- close card display section START -->
-    <section id="close-container" class="bg-base-100 shadow-sm w-10/12 mx-auto rounded-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-6 hidden">
+
+    <!-- close card display section START -->
+    <section id="close-container"
+        class="bg-base-100 shadow-sm w-10/12 mx-auto rounded-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-6 hidden">
 
 
-        
+
 
     </section>
     <!--Close  card display section END -->
+
+
+    <!-- Modal Section START -->
+
+
+    <!-- Open the modal using ID.showModal() method -->
+    <dialog id="card_modal" class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box">
+      <div id="information-container" class="space-y-5">
+
+
+
+      </div>
+    </div>
+  </dialog>
+
+    <!-- Modal Section START -->
 
 
 

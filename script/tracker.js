@@ -15,6 +15,22 @@ const openContainer = getId('open-container');
 const closeContainer = getId('close-container');
 const countIssue = getId('count-issue');
 
+
+
+//function for showing spinner start
+const setSpinner = (status) =>{
+    if(status === true){
+        document.getElementById("spinner").classList.remove("hidden");
+        document.getElementById("card-container").classList.add("hidden");
+    }
+    else{
+         document.getElementById("card-container").classList.remove("hidden");
+        document.getElementById("spinner").classList.add("hidden");
+    }
+};
+
+//function for showing spinner end
+
 // function for toggle button START
 function changeTab(tab) {
     const tabs = ['all', 'open', 'close'];
@@ -77,23 +93,28 @@ const createLabels = (labels) =>{
      ${label}</span>`);
     return btnLabels.join(" "); //convert array to string
 }
+//search for load
+
 
 // get json promise data fol all issues
 const loadCards = () =>  {
+    setSpinner(true);
     const url =  'https://phi-lab-server.vercel.app/api/v1/lab/issues';
     fetch(url)
     .then(res => res.json())
     .then(data => {
-        displayCard(data.data);
+        displayCards(data.data);
     })
 };
 
-const displayCard = (cards) =>{
+const displayCards = (cards) =>{
     // console.log(cards);
 
     //1. get the parent container & empty
     const cardContainer = document.getElementById('card-container');
-    // cardContainer.innerHTML = "";
+    cardContainer.innerHTML = "";
+    openContainer.innerHTML = "";
+    closeContainer.innerHTML = "";
     //2. get into every lessons
     cards.forEach(card => {
         // console.log(card);
@@ -101,13 +122,9 @@ const displayCard = (cards) =>{
         //create div element
         const insertCards = document.createElement('div');
         insertCards.innerHTML = `
+        
+        <div onclick="loadDetailsInfo(${card.id})"  class="cards-body p-5 shadow-lg space-y-2 b rounded-xl border-t-4 ${card.status === 'open' ? 'border-green-500' : 'border-purple-500'} overflow-hidden">
 
-        
-        
-        <div class="cards-body p-5 shadow-lg space-y-2 b rounded-xl border-t-4 ${card.status === 'open' ? 'border-green-500' : 'border-purple-500'} overflow-hidden">
-
-            
-        
             <div class="flex justify-between items-center">
                 <img src="./assets/${card.status === 'open' ? 
                     'Open-Status.png' : 'Closed- Status .png'}" 
@@ -147,9 +164,83 @@ const displayCard = (cards) =>{
         ? openContainer.appendChild(moveCard)
         : closeContainer.appendChild(moveCard)
     })
+
+    setSpinner(false);
     updateDashboard();
+    
 };
 
+//input searching Work START
+const searchData = getId('input-search');
+searchData.addEventListener("input", () =>{
+    const searchText = searchData.value;
+    if(searchText === "") {
+        loadCards();
+        return;
+    }
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`)
+    .then(res => res.json())
+    .then(data => {
+        displayCards(data.data);
+    })
+});
+//input searching Work END
+
+//Modal display Design
+const loadDetailsInfo = async (id) => {
+    const link = ` https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+    const response = await fetch(link);
+    const information = await response.json();
+    displayDetailsInfo(information.data);
+};
+
+const displayDetailsInfo = (info) => {
+    const detailsContainer = getId('information-container');
+    detailsContainer.innerHTML = `
+    <div class="space-y-3 ">
+        <h1 class="font-bold text-2xl">${info.title}</h1>
+        <div class="flex space-x-2 items-center">
+            <button class="${info.status === 'open'? 'btn btn-success' : 'btn btn-primary'} rounded-full">${info.status}</button>
+            <div class="flex items-center gap-1">
+                <div class="w-1 h-1 rounded-full bg-gray-500"></div>
+                <p class="text-neutral/50">Opened by ${info.assignee}</p>
+            </div>
+           <div class="flex items-center gap-1">
+            <div class="w-1 h-1 rounded-full bg-gray-500" ></div>
+             <p class="text-neutral/50">${info.updatedAt}</p>
+           </div>
+        </div>
+        <div class="btns flex gap-2 items-center">
+           ${createLabels(info.labels)}
+        </div>
+        <p class="text-neutral/50">${info.description}</p>
+
+        <div class="bg-base-200 flex justify-around items-center p-5 rounded-lg">
+            <div>
+                <p class="text-neutral/50">Assignee:</p>
+                <p class="font-semibold">${info.assignee}</p>
+            </div>
+            <div>
+                <p class="text-neutral/50">Priority:</p>
+                <button class="${info.priority === 'high'
+                         ? 'btn btn-secondary'
+                        : info.priority === 'medium'
+                       ?'btn btn-warning'
+                       :'btn btn-neutral'} rounded-full px-10">${info.priority.toUpperCase()}</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+    `;
+
+    getId('card_modal').showModal();
+};
 
 // finally all the dashboard update
 function updateDashboard() {
@@ -163,12 +254,22 @@ function updateDashboard() {
     // availableJobsCount.innerText = counts.all;
     countIssue.innerText = counts[defaultTab];
 }
+
 updateDashboard();
-
 loadCards();
-
 // Initial load
 changeTab(defaultTab);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
