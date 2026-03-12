@@ -205,7 +205,7 @@ const displayDetailsInfo = (info) => {
             <button class="${info.status === 'open'? 'btn btn-success' : 'btn btn-primary'} rounded-full">${info.status}</button>
             <div class="flex items-center gap-1">
                 <div class="w-1 h-1 rounded-full bg-gray-500"></div>
-                <p class="text-neutral/50">Opened by ${info.assignee}</p>
+                <p class="text-neutral/50">${info.status} by ${info.assignee}</p>
             </div>
            <div class="flex items-center gap-1">
             <div class="w-1 h-1 rounded-full bg-gray-500" ></div>
