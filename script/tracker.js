@@ -123,7 +123,7 @@ const displayCards = (cards) =>{
         const insertCards = document.createElement('div');
         insertCards.innerHTML = `
         
-        <div onclick="loadDetailsInfo(${card.id})"  class="cards-body p-5 shadow-lg space-y-2 b rounded-xl border-t-4 ${card.status === 'open' ? 'border-green-500' : 'border-purple-500'} overflow-hidden">
+        <div onclick="loadDetailsInfo(${card.id})"  class="cards-body p-5 shadow-lg space-y-2 b rounded-xl border-t-4 ${card.status === 'open' ? 'border-green-500' : 'border-purple-500'} overflow-hidden h-96">
 
             <div class="flex justify-between items-center">
                 <img src="./assets/${card.status === 'open' ? 
@@ -173,7 +173,7 @@ const displayCards = (cards) =>{
 //input searching Work START
 const searchData = getId('input-search');
 searchData.addEventListener("input", () =>{
-    const searchText = searchData.value;
+    const searchText = searchData.value.toLowerCase().replace(/\s/g, "");
     if(searchText === "") {
         loadCards();
         return;
@@ -181,7 +181,9 @@ searchData.addEventListener("input", () =>{
     fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`)
     .then(res => res.json())
     .then(data => {
-        displayCards(data.data);
+        const filterCard = data.data.filter(element => element.title.toLowerCase().replace(/\s/g, "").includes(searchText));
+        displayCards(filterCard);
+        
     })
 });
 //input searching Work END
