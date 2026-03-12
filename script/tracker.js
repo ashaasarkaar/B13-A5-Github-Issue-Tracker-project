@@ -149,7 +149,7 @@ const displayCards = (cards) =>{
                 <div class="divider -mx-5"></div>
 
                 <p class="text-neutral/50">#1 by ${card.author}</p>
-                <p class="text-neutral/50">${new Date(card.updatedAt).toLocaleString()}</p>
+                <p class="text-neutral/50">${new Date(card.createdAt).toLocaleString()}</p>
             
 
         </div>
@@ -209,7 +209,7 @@ const displayDetailsInfo = (info) => {
             </div>
            <div class="flex items-center gap-1">
             <div class="w-1 h-1 rounded-full bg-gray-500" ></div>
-             <p class="text-neutral/50">${info.updatedAt}</p>
+             <p class="text-neutral/50">${new Date(info.updatedAt).toLocaleString()}</p>
            </div>
         </div>
         <div class="btns flex gap-2 items-center">
