@@ -15,7 +15,7 @@ document.getElementById("signin-btn")
         //step-4: if signin match true-> alert () + bring home page
         if (inputValueOfName === 'admin' && inputValueOfPassword === 'admin123') {
             alert("Sign in Successfully" );
-            window.location.assign("/home.html");
+            window.location.assign("./home.html");
         }
         else{
          //step-4: if login match false-> alert () 
