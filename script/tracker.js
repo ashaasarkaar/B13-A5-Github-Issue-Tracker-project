@@ -18,13 +18,13 @@ const countIssue = getId('count-issue');
 
 
 //function for showing spinner start
-const setSpinner = (status) =>{
-    if(status === true){
+const setSpinner = (status) => {
+    if (status === true) {
         document.getElementById("spinner").classList.remove("hidden");
         document.getElementById("card-container").classList.add("hidden");
     }
-    else{
-         document.getElementById("card-container").classList.remove("hidden");
+    else {
+        document.getElementById("card-container").classList.remove("hidden");
         document.getElementById("spinner").classList.add("hidden");
     }
 };
@@ -51,19 +51,19 @@ function changeTab(tab) {
 
     //add hidden class in clickable sections
     const sections = [allCardContainer, openContainer, closeContainer]
-    for(const section of sections) {
+    for (const section of sections) {
         section.classList.add('hidden');
     }
 
 
     //remove hidden class from clickable sections
-    if(tab === 'all') {
+    if (tab === 'all') {
         allCardContainer.classList.remove('hidden');
     }
-    else if(tab === 'open'){
+    else if (tab === 'open') {
         openContainer.classList.remove('hidden');
     }
-    else{
+    else {
         closeContainer.classList.remove('hidden');
     }
 
@@ -75,21 +75,21 @@ changeTab(defaultTab);
 
 
 //dymanic labels selection function 
-const createLabels = (labels) =>{
-    const btnLabels = labels.map((label)=>`
+const createLabels = (labels) => {
+    const btnLabels = labels.map((label) => `
     <span class="btn btn-secondary btn-soft rounded-full
     ${label === "bug" ? 'btn-error'
-    : label === "help wanted" ? 'btn-warning'
-    : label === "enhancement" ? 'btn-success'
-    : label === "documentation" ? 'btn-info'
-    : 'btn secondary'
-    }">
+            : label === "help wanted" ? 'btn-warning'
+                : label === "enhancement" ? 'btn-success'
+                    : label === "documentation" ? 'btn-info'
+                        : 'btn secondary'
+        }">
     ${label === "bug" ? '<i class="fa-solid fa-bug"></i>'
-      : label === "help wanted" ? '<i class="fa-solid fa-life-ring"></i>'
-      : label === "enhancement" ? '<i class="fa-solid fa-burst"></i>'
-      : label === "documentation" ? '<i class="fa-solid fa-file"></i>'
-      : '<i class="fa-brands fa-jira"></i>'
-    }
+            : label === "help wanted" ? '<i class="fa-solid fa-life-ring"></i>'
+                : label === "enhancement" ? '<i class="fa-solid fa-burst"></i>'
+                    : label === "documentation" ? '<i class="fa-solid fa-file"></i>'
+                        : '<i class="fa-brands fa-jira"></i>'
+        }
      ${label}</span>`);
     return btnLabels.join(" "); //convert array to string
 }
@@ -97,17 +97,17 @@ const createLabels = (labels) =>{
 
 
 // get json promise data fol all issues
-const loadCards = () =>  {
+const loadCards = () => {
     setSpinner(true);
-    const url =  'https://phi-lab-server.vercel.app/api/v1/lab/issues';
+    const url = 'https://phi-lab-server.vercel.app/api/v1/lab/issues';
     fetch(url)
-    .then(res => res.json())
-    .then(data => {
-        displayCards(data.data);
-    })
+        .then(res => res.json())
+        .then(data => {
+            displayCards(data.data);
+        })
 };
 
-const displayCards = (cards) =>{
+const displayCards = (cards) => {
     // console.log(cards);
 
     //1. get the parent container & empty
@@ -126,16 +126,16 @@ const displayCards = (cards) =>{
         <div onclick="loadDetailsInfo(${card.id})"  class="cards-body p-5 shadow-lg space-y-2 b rounded-xl border-t-4 ${card.status === 'open' ? 'border-green-500' : 'border-purple-500'} overflow-hidden h-96">
 
             <div class="flex justify-between items-center">
-                <img src="./assets/${card.status === 'open' ? 
-                    'Open-Status.png' : 'Closed- Status .png'}" 
+                <img src="./assets/${card.status === 'open' ?
+                'Open-Status.png' : 'Closed- Status .png'}" 
                     alt="status-changing-icon">
                 <button class="rounded-full px-10
                 ${card.priority === 'high'
-                    ? 'btn btn-secondary btn-soft'
-                    : card.priority === 'medium'
+                ? 'btn btn-secondary btn-soft'
+                : card.priority === 'medium'
                     ? 'btn btn-warning btn-soft'
                     : 'btn btn-neutral btn-soft'
-                }
+            }
                 ">${card.priority.toUpperCase()}</button>
             </div>
 
@@ -151,7 +151,6 @@ const displayCards = (cards) =>{
                 <p class="text-neutral/50">#1 by ${card.author}</p>
                 <p class="text-neutral/50">${new Date(card.createdAt).toLocaleString()}</p>
             
-
         </div>
 
         `;
@@ -161,32 +160,31 @@ const displayCards = (cards) =>{
 
         const moveCard = insertCards.cloneNode(true);
         card.status === 'open'
-        ? openContainer.appendChild(moveCard)
-        : closeContainer.appendChild(moveCard)
+            ? openContainer.appendChild(moveCard)
+            : closeContainer.appendChild(moveCard)
     })
 
     setSpinner(false);
     updateDashboard();
-    
 };
 
 //input searching Work START
-const searchData = document.querySelectorAll('.input-search');
-searchData.addEventListener("input", () =>{
+const searchData = getId('input-search');
+searchData.addEventListener("input", () => {
     const searchText = searchData.value.toLowerCase().replace(/\s/g, "");
-    if(searchText === "") {
+    if (searchText === "") {
         loadCards();
         return;
     }
     fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`)
-    .then(res => res.json())
-    .then(data => {
-        const filterCard = data.data.filter(element => element.title.toLowerCase().replace(/\s/g, "").includes(searchText));
-        displayCards(filterCard);
-        
-    })
+        .then(res => res.json())
+        .then(data => {
+            const filterCard = data.data.filter(element => element.title.toLowerCase().replace(/\s/g, "").includes(searchText));
+            displayCards(filterCard);
+        })
 });
 //input searching Work END
+
 
 //Modal display Design
 const loadDetailsInfo = async (id) => {
@@ -202,7 +200,7 @@ const displayDetailsInfo = (info) => {
     <div class="space-y-3 ">
         <h1 class="font-bold text-2xl">${info.title}</h1>
         <div class="flex space-x-2 items-center">
-            <button class="${info.status === 'open'? 'btn btn-success' : 'btn btn-primary'} rounded-full">${info.status}</button>
+            <button class="${info.status === 'open' ? 'btn btn-success' : 'btn btn-primary'} rounded-full">${info.status}</button>
             <div class="flex items-center gap-1">
                 <div class="w-1 h-1 rounded-full bg-gray-500"></div>
                 <p class="text-neutral/50">${info.status} by ${info.assignee}</p>
@@ -225,10 +223,10 @@ const displayDetailsInfo = (info) => {
             <div>
                 <p class="text-neutral/50">Priority:</p>
                 <button class="${info.priority === 'high'
-                         ? 'btn btn-secondary'
-                        : info.priority === 'medium'
-                       ?'btn btn-warning'
-                       :'btn btn-neutral'} rounded-full px-10">${info.priority.toUpperCase()}</button>
+            ? 'btn btn-secondary'
+            : info.priority === 'medium'
+                ? 'btn btn-warning'
+                : 'btn btn-neutral'} rounded-full px-10">${info.priority.toUpperCase()}</button>
             </div>
         </div>
     </div>
