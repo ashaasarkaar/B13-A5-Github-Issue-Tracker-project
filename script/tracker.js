@@ -141,7 +141,7 @@ const displayCards = (cards) => {
 
             <h2 class="font-semibold text-md">${card.title}</h2>
             <p class="text-neutral/50 text-sm">${card.description}</p>
-            <div class="btns flex items-center gap-1 flex-nowrap">
+            <div class="btns flex items-center gap-1 flex-wrap md:flex-nowrap">
                ${createLabels(card.labels)}
             </div>
 
