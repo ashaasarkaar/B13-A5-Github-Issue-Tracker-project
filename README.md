@@ -60,7 +60,7 @@ In Modern JavaScript, Developers generally, avoid the use of var. They use let v
 
 2️⃣ What is the spread operator (...)?
 
---> In JavaScript, spread operator is a feature of ES6 that is used in array, object or the elements of iterable to separate. That Means separate or take them out one by one. it help to make code easy, small and also clean. The help of Three dot (...) is defined this spread operator. 
+--> In JavaScript, spread operator is a feature of ES6 that is used in array, object or the elements of iterable to separate. That Means separate or take them out one by one. it helps to make code easy, small and also clean. The help of Three dot (...) is defined this spread operator. 
 
 ### use spread operator(...) with Array
 1. It helps to add, copy or merge elements of array.
@@ -69,7 +69,7 @@ In Modern JavaScript, Developers generally, avoid the use of var. They use let v
 4. we can add new elements in array.
 
 ### use spread operator(...) with object
-1. we can us it to copy or merge an object.
+1. we can use it to copy or merge an object.
 
 ### use spread operator(...) as an argument of a function
 1. By the help of it we can send the elements of array one by one or separately as an argument of the function.
