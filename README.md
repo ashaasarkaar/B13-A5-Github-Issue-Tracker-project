@@ -92,7 +92,7 @@ This method is used to run a loop on each element of array. It won't return any 
 
 4️⃣ What is an arrow function?
 
---> Arrow Function(=>) is a compact and the modern way of declaration of function. It has come from ES6(ECMAScript) in 2015. It is small and more readable rather than a function. The work of normal function and arrow function is same but there is a little bit difference during the writing way of code, that is it(arrow function) is easy and small to write code shortly. If arrow function works in one line, We won't write return. we can decrease our write rather than normal function.
+--> Arrow Function(=>) is a compact and the modern way of declaration of function. It has come from ES6(ECMAScript) in 2015. It is small and more readable rather than a normal function. The work of normal function and arrow function is same but there is a little bit difference during the writing way of code, that is it(arrow function) is easy and small to write code shortly. If arrow function works in one line, We won't write return. we can decrease our write rather than normal function.
 
 5️⃣ What are template literals?
 

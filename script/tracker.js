@@ -171,7 +171,7 @@ const displayCards = (cards) =>{
 };
 
 //input searching Work START
-const searchData = getId('input-search');
+const searchData = document.querySelectorAll('.input-search');
 searchData.addEventListener("input", () =>{
     const searchText = searchData.value.toLowerCase().replace(/\s/g, "");
     if(searchText === "") {
