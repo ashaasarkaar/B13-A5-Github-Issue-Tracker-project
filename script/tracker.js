@@ -188,7 +188,7 @@ searchData.addEventListener("input", () => {
 
 //Modal display Design
 const loadDetailsInfo = async (id) => {
-    const link = ` https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+    const link = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
     const response = await fetch(link);
     const information = await response.json();
     displayDetailsInfo(information.data);
